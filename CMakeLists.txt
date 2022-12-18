@@ -19,6 +19,7 @@ enable_testing()
 add_executable(
   trabajoEnEquipo_test
   src/trabajoEnEquipo_test.cc
+  src/trabajoEnEquipo.cpp
 )
 target_link_libraries(
   trabajoEnEquipo_test
