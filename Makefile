@@ -1,6 +1,6 @@
 .PHONY: run
 
-build/trabajoEnEquipo: src/trabajoEnEquipo.c
+build/trabajoEnEquipo: src/trabajoEnEquipo.cpp
 	gcc -Wall -pedantic -g -Wextra -pthread -o $@ $<
 
 run: build/trabajoEnEquipo

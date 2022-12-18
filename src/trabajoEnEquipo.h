@@ -11,8 +11,6 @@ typedef struct mascotas_t {
 
 typedef struct departamento_t {
   float      renta;
-  int        numPerros;
-  int        numGatos;
   mascotas_t mascotas;
   int        numNinios;
   int        edadesNinios[5];
@@ -23,3 +21,4 @@ typedef struct departamento_t {
 
 departamento_t llenaDepartamento();
 void llenaEdificio(departamento_t* ed, int pisos, int depsPorPiso);
+int mayorEdadDeAdulto(departamento_t* edificioPtr, int depsPorPiso, int pisos);
