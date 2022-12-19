@@ -16,7 +16,7 @@ departamento_t llenaDepartamento(int piso, int depto) {
   //  sal del bloque de código
   while (true) {
     printf(
-        "Dame un valor valido para la renta del departamento %d del piso %d:",
+        "Dame un valor valido para la renta del departamento %d del piso %d: ",
         piso + 1, depto + 1);
 
     scanf("%f", &departamento.renta);
@@ -65,23 +65,43 @@ void llenaEdificio(departamento_t *edificioPtr, int depsPorPiso, int pisos) {
   }
 }
 
-int mayorEdadDeAdulto(departamento_t *edificioPtr, int depsPorPiso, int pisos) {
+int adultosDeMayorEdad(departamento_t *edificioPtr, int depsPorPiso, int pisos,
+                       int pisosMayorEdad[], int departamentosMayorEdad[], int indicesDeAdultosMayorEdad[]) {
+
   int mayorEdad = (edificioPtr + 1)->edadesAdultos[0];
+  pisosMayorEdad[0] = 0;
+  departamentosMayorEdad[0] = 1;
+  indicesDeAdultosMayorEdad[0] = 0;
+  int nextIndex = 1;
+
+
   departamento_t structActual;
 
   for (int deptoActual = 0; deptoActual < depsPorPiso; deptoActual++) {
     for (int pisoActual = 0; pisoActual < pisos; pisoActual++) {
+
       if ( deptoActual == 0 && pisoActual == 0 ) {
         continue;
       }
+
       structActual = *(edificioPtr + (pisoActual * depsPorPiso + deptoActual));
       for (int adulto = 0; adulto < structActual.numAdultos; adulto++) {
-        printf("%d %lu\n", structActual.edadesAdultos[adulto], sizeof(departamento_t));
         if (structActual.edadesAdultos[adulto] > mayorEdad) {
           mayorEdad = structActual.edadesAdultos[adulto];
+          pisosMayorEdad[0] = pisoActual;
+          departamentosMayorEdad[0] = deptoActual;
+          indicesDeAdultosMayorEdad[0] = adulto;
+          nextIndex = 1;
+          continue;
         }
+
+        pisosMayorEdad[nextIndex] = pisoActual;
+        departamentosMayorEdad[nextIndex] = deptoActual;
+        indicesDeAdultosMayorEdad[nextIndex] = adulto;
+        nextIndex++;
       }
     }
   }
-  return mayorEdad;
+
+  return nextIndex;
 }

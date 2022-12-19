@@ -1,4 +1,4 @@
-const int MAX_HABITANTES = 6;
+const int MAX_HABITANTES_POR_DEPT = 6;
 const float MAX_RENTA = 9000;
 const float MIN_RENTA = 3000;
 
@@ -21,4 +21,5 @@ typedef struct departamento_t {
 
 departamento_t llenaDepartamento();
 void llenaEdificio(departamento_t* ed, int pisos, int depsPorPiso);
-int mayorEdadDeAdulto(departamento_t* edificioPtr, int depsPorPiso, int pisos);
+int adultosDeMayorEdad(departamento_t *edificioPtr, int depsPorPiso, int pisos,
+                       int pisosMayorEdad[], int departamentosMayorEdad[], int indicesDeAdultosMayorEdad[]);

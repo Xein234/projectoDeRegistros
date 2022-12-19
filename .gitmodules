@@ -1,6 +1,3 @@
-[submodule "Unity"]
-	path = Unity
-	url = https://github.com/ThrowTheSwitch/Unity
-[submodule "test/googletest"]
-	path = googletest
-	url = https://github.com/google/googletest
+[submodule "doctest"]
+	path = doctest
+	url = https://github.com/doctest/doctest
