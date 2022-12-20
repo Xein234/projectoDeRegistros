@@ -76,17 +76,22 @@ TEST_CASE("prueba todo el programa") {
   int departamentosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
   int indicesDeAdultosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
 
-  int nextIndex = adultosDeMayorEdad(&edificio[0][0], depsPorPiso, pisos, pisosMayorEdad, departamentosMayorEdad, indicesDeAdultosMayorEdad);
+  int mayorEdad;
+  int nextIndex = adultosDeMayorEdad(&edificio[0][0], depsPorPiso, pisos, pisosMayorEdad, departamentosMayorEdad, indicesDeAdultosMayorEdad, &mayorEdad);
 
   int indicesDeAdultosMayorEdadEsperados[2] = {2, 0};
   int pisosMayorEdadEsperados[2] = {0, 1};
   int departamentosMayorEdadEsperados[2] = {1, 1};
 
   SUBCASE("testeando adultosDeMayorEdad()") {
+    CHECK(mayorEdad == 99);
     for (int i = 0; i < nextIndex; ++i) {
         CHECK(indicesDeAdultosMayorEdadEsperados[i] == indicesDeAdultosMayorEdad[i]);
         CHECK(pisosMayorEdadEsperados[i] == pisosMayorEdad[i]);
         CHECK(departamentosMayorEdadEsperados[i] == departamentosMayorEdad[i]);
     }
+  }
+
+  SUBCASE("testeando departamentosConMayorRenta") {
   }
 }

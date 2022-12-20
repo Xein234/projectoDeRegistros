@@ -66,10 +66,11 @@ void llenaEdificio(departamento_t *edificioPtr, int depsPorPiso, int pisos) {
 }
 
 int adultosDeMayorEdad(departamento_t *edificioPtr, int depsPorPiso, int pisos,
-                       int pisosMayorEdad[], int departamentosMayorEdad[], int indicesDeAdultosMayorEdad[]) {
+                       int pisosMayorEdad[], int departamentosMayorEdad[],
+                       int indicesDeAdultosMayorEdad[], int* mayorEdad) {
 
   int edadActual = (edificioPtr + 1)->edadesAdultos[0];
-  int mayorEdad = edadActual;
+  *mayorEdad = edadActual;
   pisosMayorEdad[0] = 0;
   departamentosMayorEdad[0] = 1;
   indicesDeAdultosMayorEdad[0] = 0;
@@ -89,12 +90,12 @@ int adultosDeMayorEdad(departamento_t *edificioPtr, int depsPorPiso, int pisos,
       for (int adulto = 0; adulto < structActual.numAdultos; adulto++) {
         edadActual = structActual.edadesAdultos[adulto];
 
-        if (edadActual < mayorEdad) {
+        if (edadActual < *mayorEdad) {
           continue;
         }
 
-        if (edadActual > mayorEdad) {
-          mayorEdad = edadActual;
+        if (edadActual > *mayorEdad) {
+          *mayorEdad = edadActual;
           pisosMayorEdad[0] = pisoActual;
           departamentosMayorEdad[0] = deptoActual;
           indicesDeAdultosMayorEdad[0] = adulto;
@@ -111,4 +112,17 @@ int adultosDeMayorEdad(departamento_t *edificioPtr, int depsPorPiso, int pisos,
   }
 
   return nextIndex;
+}
+
+void printAdultosDeMayorEdad(int pisosMayorEdad[], int departamentosMayorEdad[], int indicesAdultosDeMayorEdad[],
+                             int anios, int cantidad)
+{
+  printf("Los adultos de mayor edad en el edificio son:\n");
+  for (int i = 0; i < cantidad; ++i) {
+    printf("el adulto numero %d del piso %d y departamento %d\n",
+           indicesAdultosDeMayorEdad[i] + 1, pisosMayorEdad[i] + 1,
+           departamentosMayorEdad[i] + 1);
+  }
+  printf("y todos tienen %d anios\n", anios);
+  printf("\n");
 }

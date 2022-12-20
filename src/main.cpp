@@ -32,21 +32,17 @@ int main(int argc, char *argv[]) {
   departamento_t edificio[pisos][depsPorPiso];
   llenaEdificio(&edificio[0][0], depsPorPiso, pisos);
 
+  //Probamos otros módulos aquí, temporalmente.
   int pisosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
   int departamentosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
   int indicesDeAdultosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
 
-  int nextIndex = adultosDeMayorEdad(&edificio[0][0], depsPorPiso, pisos, pisosMayorEdad, departamentosMayorEdad, indicesDeAdultosMayorEdad);
+  int mayorEdad;
+  int nextIndex = adultosDeMayorEdad(&edificio[0][0], depsPorPiso, pisos, pisosMayorEdad, departamentosMayorEdad, indicesDeAdultosMayorEdad, &mayorEdad);
 
-  printf("Los adultos con mayor edad son\n");
-  for (int i = 0; i < nextIndex; ++i) {
-    printf("El adulto numero %d, del departamento %d en el edificio %d\n",
-           indicesDeAdultosMayorEdad[i] + 1,
-           pisosMayorEdad[i] + 1,
-           departamentosMayorEdad[i] + 1);
-  }
 
-  //Probamos otros módulos aquí, temporalmente.
+
+  printAdultosDeMayorEdad(pisosMayorEdad, departamentosMayorEdad, indicesDeAdultosMayorEdad, mayorEdad, nextIndex);
 
   return 0;
 }
