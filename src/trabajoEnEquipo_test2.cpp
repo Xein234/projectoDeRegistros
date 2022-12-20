@@ -40,7 +40,7 @@ TEST_CASE("prueba todo el programa") {
     .ingreso = 9000};
 
   departamento_t departamento3 =\
-  { .renta = 3000,
+  { .renta = 9000,
     .mascotas = mascotas3,
     .numNinios = 2,
     .edadesNinios = {5, 6},
@@ -71,19 +71,21 @@ TEST_CASE("prueba todo el programa") {
     {depDelArrendatario, departamento1, departamento2}, {departamento3, departamento4, departamento5} };
   int pisos = 2;
   int depsPorPiso = 3;
+  int deptosPorPiso = 3;
 
-  int pisosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
-  int departamentosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
-  int indicesDeAdultosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
-
-  int mayorEdad;
-  int nextIndex = adultosDeMayorEdad(&edificio[0][0], depsPorPiso, pisos, pisosMayorEdad, departamentosMayorEdad, indicesDeAdultosMayorEdad, &mayorEdad);
-
-  int indicesDeAdultosMayorEdadEsperados[2] = {2, 0};
-  int pisosMayorEdadEsperados[2] = {0, 1};
-  int departamentosMayorEdadEsperados[2] = {1, 1};
 
   SUBCASE("testeando adultosDeMayorEdad()") {
+    int pisosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
+    int departamentosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
+    int indicesDeAdultosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
+
+    int mayorEdad;
+    int nextIndex = adultosDeMayorEdad(&edificio[0][0], depsPorPiso, pisos, pisosMayorEdad, departamentosMayorEdad, indicesDeAdultosMayorEdad, &mayorEdad);
+
+    int indicesDeAdultosMayorEdadEsperados[2] = {2, 0};
+    int pisosMayorEdadEsperados[2] = {0, 1};
+    int departamentosMayorEdadEsperados[2] = {1, 1};
+
     CHECK(mayorEdad == 99);
     for (int i = 0; i < nextIndex; ++i) {
         CHECK(indicesDeAdultosMayorEdadEsperados[i] == indicesDeAdultosMayorEdad[i]);
@@ -92,6 +94,21 @@ TEST_CASE("prueba todo el programa") {
     }
   }
 
-  SUBCASE("testeando departamentosConMayorRenta") {
-  }
+  /* SUBCASE("testeando departamentosMayorRenta()") { */
+  /*   int pisosMayorRenta[pisos*deptosPorPiso-1]; */
+  /*   int deptosMayorRenta[pisos*deptosPorPiso-1]; */
+  /*   int indicesMayorRenta[pisos*deptosPorPiso-1]; */
+
+  /*   int mayorRenta; */
+  /*   int nextIndex = encuentraDeptosMayorRenta(&edificio[0][0], deptosPorPiso, pisos, pisosMayorRenta, deptosMayorRenta, &mayorRenta); */
+
+  /*   int pisosMayorRentaEsperados[2] = {0, 1}; */
+  /*   int deptosMayorRentaEsperados[2] = {2, 0}; */
+
+  /*   CHECK(mayorRenta == 9000); */
+  /*     for (int i = 0; i < nextIndex; ++i) { */
+  /*       CHECK(pisosMayorRenta[i] == pisosMayorRentaEsperados[i]); */
+  /*       CHECK(deptosMayorRenta[i] == deptosMayorRentaEsperados[i]); */
+  /*     } */
+  /* } */
 }

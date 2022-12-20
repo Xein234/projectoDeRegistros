@@ -126,3 +126,17 @@ void printAdultosDeMayorEdad(int pisosMayorEdad[], int departamentosMayorEdad[],
   printf("y todos tienen %d anios\n", anios);
   printf("\n");
 }
+
+int encuentraDeptosMayorRenta(departamento_t *edificioPtr, int deptosPorPiso, int pisos,
+                       int pisosMayorRenta[], int depatosMayorRenta[],
+                     int* mayorRenta) {
+  perror("Aun no implementado");
+
+  int nextIndex;
+  return nextIndex;
+}
+
+void printDeptosMayorRenta(int pisosMayorRenta[], int deptosMayorRenta[],
+                           float renta, int cantidad) {
+  perror("Aun no implementado");
+}
