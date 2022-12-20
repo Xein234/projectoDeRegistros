@@ -68,7 +68,8 @@ void llenaEdificio(departamento_t *edificioPtr, int depsPorPiso, int pisos) {
 int adultosDeMayorEdad(departamento_t *edificioPtr, int depsPorPiso, int pisos,
                        int pisosMayorEdad[], int departamentosMayorEdad[], int indicesDeAdultosMayorEdad[]) {
 
-  int mayorEdad = (edificioPtr + 1)->edadesAdultos[0];
+  int edadActual = (edificioPtr + 1)->edadesAdultos[0];
+  int mayorEdad = edadActual;
   pisosMayorEdad[0] = 0;
   departamentosMayorEdad[0] = 1;
   indicesDeAdultosMayorEdad[0] = 0;
@@ -86,8 +87,14 @@ int adultosDeMayorEdad(departamento_t *edificioPtr, int depsPorPiso, int pisos,
 
       structActual = *(edificioPtr + (pisoActual * depsPorPiso + deptoActual));
       for (int adulto = 0; adulto < structActual.numAdultos; adulto++) {
-        if (structActual.edadesAdultos[adulto] > mayorEdad) {
-          mayorEdad = structActual.edadesAdultos[adulto];
+        edadActual = structActual.edadesAdultos[adulto];
+
+        if (edadActual < mayorEdad) {
+          continue;
+        }
+
+        if (edadActual > mayorEdad) {
+          mayorEdad = edadActual;
           pisosMayorEdad[0] = pisoActual;
           departamentosMayorEdad[0] = deptoActual;
           indicesDeAdultosMayorEdad[0] = adulto;
