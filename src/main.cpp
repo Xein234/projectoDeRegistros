@@ -35,14 +35,14 @@ int main(int argc, char *argv[]) {
   //Probamos otros módulos aquí, temporalmente.
   int pisosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
   int deptosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
-  int indicesDeAdultosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
+  int indicesAdultosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
 
   int mayorEdad;
-  int nextIndex = encuentraAdultosMayorEdad(&edificio[0][0], deptosPorPiso, pisos, pisosMayorEdad, deptosMayorEdad, indicesDeAdultosMayorEdad, &mayorEdad);
+  int nextIndex = encuentraAdultosMayorEdad(&edificio[0][0], deptosPorPiso, pisos, pisosMayorEdad, deptosMayorEdad, indicesAdultosMayorEdad, &mayorEdad);
 
 
 
-  printAdultosDeMayorEdad(pisosMayorEdad, deptosMayorEdad, indicesDeAdultosMayorEdad, mayorEdad, nextIndex);
+  printAdultosDeMayorEdad(pisosMayorEdad, deptosMayorEdad, indicesAdultosMayorEdad, mayorEdad, nextIndex);
 
 
   /* int pisosConPerro[pisos*deptosPorPiso-1]; */

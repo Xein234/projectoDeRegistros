@@ -26,7 +26,7 @@ typedef struct depto_t {
 depto_t llenaDepto();
 void llenaEdificio(depto_t* ed, int pisos, int deptosPorPiso);
 /* int encuentraAdultosMayorEdad(depto_t *edificioPtr, int deptosPorPiso, int pisos, */
-/*                        int pisosMayorEdad[], int deptosMayorEdad[], int indicesDeAdultosMayorEdad[]); */
+/*                        int pisosMayorEdad[], int deptosMayorEdad[], int indicesAdultosMayorEdad[]); */
 
 depto_t llenaDepartamento(int piso, int deptoEnPiso) {
   depto_t depto;
@@ -92,13 +92,13 @@ void llenaEdificio(depto_t *edificioPtr, int deptosPorPiso, int pisos) {
 
 int encuentraAdultosMayorEdad(depto_t *edificioPtr, int deptosPorPiso, int pisos,
                        int pisosMayorEdad[], int deptosMayorEdad[],
-                       int indicesDeAdultosMayorEdad[], int* mayorEdad) {
+                       int indicesAdultosMayorEdad[], int* mayorEdad) {
 
   int edadActual = (edificioPtr + 1)->edadesAdultos[0];
   *mayorEdad = edadActual;
   pisosMayorEdad[0] = 0;
   deptosMayorEdad[0] = 1;
-  indicesDeAdultosMayorEdad[0] = 0;
+  indicesAdultosMayorEdad[0] = 0;
   int nextIndex = 1;
 
 
@@ -123,14 +123,14 @@ int encuentraAdultosMayorEdad(depto_t *edificioPtr, int deptosPorPiso, int pisos
           *mayorEdad = edadActual;
           pisosMayorEdad[0] = pisoActual;
           deptosMayorEdad[0] = deptoActual;
-          indicesDeAdultosMayorEdad[0] = adulto;
+          indicesAdultosMayorEdad[0] = adulto;
           nextIndex = 1;
           continue;
         }
 
         pisosMayorEdad[nextIndex] = pisoActual;
         deptosMayorEdad[nextIndex] = deptoActual;
-        indicesDeAdultosMayorEdad[nextIndex] = adulto;
+        indicesAdultosMayorEdad[nextIndex] = adulto;
         nextIndex++;
       }
     }
@@ -157,7 +157,7 @@ int encuentraDeptosMayorRenta(depto_t *edificioPtr, int deptosPorPiso, int pisos
                      int* mayorRenta) {
   perror("Aun no implementado");
 
-  int nextIndex;
+  int nextIndex = 0;
   return nextIndex;
 }
 

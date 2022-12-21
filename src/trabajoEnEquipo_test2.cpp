@@ -2,16 +2,16 @@
 #include "../doctest/doctest/doctest.h"
 #include "trabajoEnEquipo.cpp"
 #include <stdio.h>
+  mascotas_t mascotasArrendatario = { .numPerros = 11, .numGatos = 22, .numOtras = 15, };
   mascotas_t mascotas1 = { .numPerros = 1, .numGatos = 1, .numOtras = 1, };
   mascotas_t mascotas2 = { .numPerros = 0, .numGatos = 0, .numOtras = 0, };
   mascotas_t mascotas3 = { .numPerros = 0, .numGatos = 7, .numOtras = 0, };
   mascotas_t mascotas4 = { .numPerros = 0, .numGatos = 7, .numOtras = 0, };
   mascotas_t mascotas5 = { .numPerros = 1, .numGatos = 7, .numOtras = 0, };
-  mascotas_t mascotasDelArrendatario = { .numPerros = 11, .numGatos = 22, .numOtras = 15, };
 
-  depto_t deptoDelArrendatario =\
+  depto_t deptoArrendatario =\
   { .renta = 12345,
-    .mascotas = mascotasDelArrendatario,
+    .mascotas = mascotasArrendatario,
     .numNinios = 999,
     .edadesNinios = {47, 36, 24},
     .numAdultos = 3,
@@ -65,26 +65,26 @@
     .ingreso = 8000};
 
 
-  depto_t edificio[2][3] = {
-    {deptoDelArrendatario, depto1, depto2}, {depto3, depto4, depto5} };
+  depto_t edificio[][3] = {
+    {deptoArrendatario, depto1, depto2}, {depto3, depto4, depto5} };
   int pisos = 2;
   int deptosPorPiso = 3;
 
 TEST_CASE("encuentraAdultosMayorEdad()") {
   int pisosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
   int deptosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
-  int indicesDeAdultosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
+  int indicesAdultosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
 
   int mayorEdad;
-  int nextIndex = encuentraAdultosMayorEdad(&edificio[0][0], deptosPorPiso, pisos, pisosMayorEdad, deptosMayorEdad, indicesDeAdultosMayorEdad, &mayorEdad);
+  int nextIndex = encuentraAdultosMayorEdad(&edificio[0][0], deptosPorPiso, pisos, pisosMayorEdad, deptosMayorEdad, indicesAdultosMayorEdad, &mayorEdad);
 
-  int indicesDeAdultosMayorEdadEsperados[2] = {2, 0};
-  int pisosMayorEdadEsperados[2] = {0, 1};
-  int deptosMayorEdadEsperados[2] = {1, 1};
+  int indicesAdultosMayorEdadEsperados[] = {2, 0};
+  int pisosMayorEdadEsperados[] = {0, 1};
+  int deptosMayorEdadEsperados[] = {1, 1};
 
   CHECK(mayorEdad == 99);
   for (int i = 0; i < nextIndex; ++i) {
-      CHECK(indicesDeAdultosMayorEdadEsperados[i] == indicesDeAdultosMayorEdad[i]);
+      CHECK(indicesAdultosMayorEdadEsperados[i] == indicesAdultosMayorEdad[i]);
       CHECK(pisosMayorEdadEsperados[i] == pisosMayorEdad[i]);
       CHECK(deptosMayorEdadEsperados[i] == deptosMayorEdad[i]);
   }
@@ -97,8 +97,8 @@ TEST_CASE("encuentraDeptosMayorRenta()") {
   int mayorRenta;
   int nextIndex = encuentraDeptosMayorRenta(&edificio[0][0], deptosPorPiso, pisos, pisosMayorRenta, deptosMayorRenta, &mayorRenta);
 
-  int pisosMayorRentaEsperados[2] = {0, 1};
-  int deptosMayorRentaEsperados[2] = {2, 0};
+  int pisosMayorRentaEsperados[] = {0, 1};
+  int deptosMayorRentaEsperados[] = {2, 0};
 
   CHECK(nextIndex == 2);
 
@@ -115,8 +115,8 @@ TEST_CASE("encuentraDeptosConPerro()"){
 
   int nextIndex = encuentraDeptosConPerro(&edificio[0][0], deptosPorPiso, pisos, pisosConPerro, deptosConPerro);
 
-  int pisosConPerroEsperados[2] = {0, 1};
-  int deptosConPerroEsperados[2] = {1, 2};
+  int pisosConPerroEsperados[] = {0, 1};
+  int deptosConPerroEsperados[] = {1, 2};
 
   CHECK(nextIndex == 2);
     for (int i = 0; i < nextIndex; ++i) {
@@ -131,8 +131,8 @@ TEST_CASE("encuentraDeptosConGato()"){
 
   int nextIndex = encuentraDeptosConGato(&edificio[0][0], deptosPorPiso, pisos, pisosConGato, deptosConGato);
 
-  int pisosConGatoEsperados[4] =  {0, 1, 1, 1};
-  int deptosConGatoEsperados[4] = {1, 0, 1, 2};
+  int pisosConGatoEsperados[] =  {0, 1, 1, 1};
+  int deptosConGatoEsperados[] = {1, 0, 1, 2};
 
   CHECK(nextIndex == 4);
     for (int i = 0; i < nextIndex; ++i) {
@@ -147,8 +147,8 @@ TEST_CASE("encuentraFamiliaMenosIngresos()"){
 
   int nextIndex = encuentraDeptosMenosIngresos(&edificio[0][0], deptosPorPiso, pisos, pisosMenosIngresos, deptosMenosIngresos);
 
-  int pisosMenosIngresosEsperados[2] =  {0, 1};
-  int deptosMenosIngresosEsperados[2] = {1, 0};
+  int pisosMenosIngresosEsperados[] =  {0, 1};
+  int deptosMenosIngresosEsperados[] = {1, 0};
 
   CHECK(nextIndex == 2);
     for (int i = 0; i < nextIndex; ++i) {
@@ -168,9 +168,9 @@ TEST_CASE("encuentraNiniosMenorEdad()") {
 
   int nextIndex = encuentraNiniosMenorEdad(&edificio[0][0], deptosPorPiso, pisos, pisosNiniosMenorEdad, deptosNiniosMenorEdad, indicesNiniosMenorEdad);
 
-  int indicesNiniosMenorEdadEsperados[3] = {1, 1, 1};
-  int pisosNiniosMenorEdadEsperados[3] =  {0, 0, 0};
-  int deptosNiniosMenorEdadEsperados[3] = {1, 1, 1};
+  int indicesNiniosMenorEdadEsperados[] = {1, 1, 1};
+  int pisosNiniosMenorEdadEsperados[] =  {0, 0, 0};
+  int deptosNiniosMenorEdadEsperados[] = {1, 1, 1};
 
   CHECK(nextIndex == 3);
     for (int i = 0; i < nextIndex; ++i) {
