@@ -11,7 +11,7 @@ TEST_CASE("prueba todo el programa") {
   mascotas_t mascotas5 = { .numPerros = 0, .numGatos = 7, .numOtras = 0, };
   mascotas_t mascotasDelArrendatario = { .numPerros = 11, .numGatos = 22, .numOtras = 15, };
 
-  departamento_t depDelArrendatario =\
+  depto_t deptoDelArrendatario =\
   { .renta = 12345,
     .mascotas = mascotasDelArrendatario,
     .numNinios = 999,
@@ -21,7 +21,7 @@ TEST_CASE("prueba todo el programa") {
     .ingreso = 7890};
 
 
-  departamento_t departamento1 =\
+  depto_t depto1 =\
   { .renta = 3000,
     .mascotas = mascotas1,
     .numNinios = 3,
@@ -30,7 +30,7 @@ TEST_CASE("prueba todo el programa") {
     .edadesAdultos = {18, 50, 99},
     .ingreso = 4000};
 
-  departamento_t departamento2 =\
+  depto_t depto2 =\
   { .renta = 9000,
     .mascotas = mascotas2,
     .numNinios = 3,
@@ -39,7 +39,7 @@ TEST_CASE("prueba todo el programa") {
     .edadesAdultos = {18, 50, 93},
     .ingreso = 9000};
 
-  departamento_t departamento3 =\
+  depto_t depto3 =\
   { .renta = 9000,
     .mascotas = mascotas3,
     .numNinios = 2,
@@ -48,7 +48,7 @@ TEST_CASE("prueba todo el programa") {
     .edadesAdultos = {20, 21},
     .ingreso = 4000};
 
-  departamento_t departamento4 =\
+  depto_t depto4 =\
   { .renta = 5000,
     .mascotas = mascotas4,
     .numNinios = 0,
@@ -57,7 +57,7 @@ TEST_CASE("prueba todo el programa") {
     .edadesAdultos = {99},
     .ingreso = 6000};
 
-  departamento_t departamento5 =\
+  depto_t depto5 =\
   { .renta = 7000,
     .mascotas = mascotas5,
     .numNinios = 0,
@@ -67,34 +67,33 @@ TEST_CASE("prueba todo el programa") {
     .ingreso = 8000};
 
 
-  departamento_t edificio[2][3] = {
-    {depDelArrendatario, departamento1, departamento2}, {departamento3, departamento4, departamento5} };
+  depto_t edificio[2][3] = {
+    {deptoDelArrendatario, depto1, depto2}, {depto3, depto4, depto5} };
   int pisos = 2;
-  int depsPorPiso = 3;
   int deptosPorPiso = 3;
 
 
-  SUBCASE("testeando adultosDeMayorEdad()") {
-    int pisosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
-    int departamentosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
-    int indicesDeAdultosMayorEdad[(pisos*depsPorPiso-1)*MAX_HABITANTES_POR_DEPT];
+  SUBCASE("testeando encuentraAdultosMayorEdad()") {
+    int pisosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
+    int deptosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
+    int indicesDeAdultosMayorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
 
     int mayorEdad;
-    int nextIndex = adultosDeMayorEdad(&edificio[0][0], depsPorPiso, pisos, pisosMayorEdad, departamentosMayorEdad, indicesDeAdultosMayorEdad, &mayorEdad);
+    int nextIndex = encuentraAdultosMayorEdad(&edificio[0][0], deptosPorPiso, pisos, pisosMayorEdad, deptosMayorEdad, indicesDeAdultosMayorEdad, &mayorEdad);
 
     int indicesDeAdultosMayorEdadEsperados[2] = {2, 0};
     int pisosMayorEdadEsperados[2] = {0, 1};
-    int departamentosMayorEdadEsperados[2] = {1, 1};
+    int deptosMayorEdadEsperados[2] = {1, 1};
 
     CHECK(mayorEdad == 99);
     for (int i = 0; i < nextIndex; ++i) {
         CHECK(indicesDeAdultosMayorEdadEsperados[i] == indicesDeAdultosMayorEdad[i]);
         CHECK(pisosMayorEdadEsperados[i] == pisosMayorEdad[i]);
-        CHECK(departamentosMayorEdadEsperados[i] == departamentosMayorEdad[i]);
+        CHECK(deptosMayorEdadEsperados[i] == deptosMayorEdad[i]);
     }
   }
 
-  /* SUBCASE("testeando departamentosMayorRenta()") { */
+  /* SUBCASE("testeando deptosMayorRenta()") { */
   /*   int pisosMayorRenta[pisos*deptosPorPiso-1]; */
   /*   int deptosMayorRenta[pisos*deptosPorPiso-1]; */
   /*   int indicesMayorRenta[pisos*deptosPorPiso-1]; */
