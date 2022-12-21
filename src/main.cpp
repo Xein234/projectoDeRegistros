@@ -44,5 +44,14 @@ int main(int argc, char *argv[]) {
 
   printAdultosDeMayorEdad(pisosMayorEdad, deptosMayorEdad, indicesDeAdultosMayorEdad, mayorEdad, nextIndex);
 
+
+  /* int pisosConPerro[pisos*deptosPorPiso-1]; */
+  /* int deptosConPerro[pisos*deptosPorPiso-1]; */
+
+  /* nextIndex = encuentraDeptosConPerro(&edificio[0][0], deptosPorPiso, pisos, pisosConPerro, deptosConPerro); */
+
+  /* printDeptosConPerro(pisosConPerro, deptosConPerro, nextIndex); */
+
+
   return 0;
 }

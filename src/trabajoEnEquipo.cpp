@@ -165,3 +165,85 @@ void printDeptosMayorRenta(int pisosMayorRenta[], int deptosMayorRenta[],
                            float renta, int cantidad) {
   perror("Aun no implementado");
 }
+
+int encuentraDeptosConPerro(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConPerro[], int deptosConPerro[]) {
+  depto_t structActual;
+  int nextIndex = 0;
+
+  return nextIndex;
+}
+
+void printDeptosConPerro(int pisosConPerro[], int deptosConPerro[], int cantidad) {
+  printf("Los departamentos con al menos un perro son:\n");
+  for (int i = 0; i < cantidad; ++i) {
+    printf("el departamento %d del piso %d\n", deptosConPerro[i], pisosConPerro[i]);
+  }
+  printf("\n");
+}
+
+int encuentraDeptosConGato(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConGato[], int deptosConGato[]) {
+  depto_t structActual;
+  int nextIndex = 0;
+  return nextIndex;
+}
+
+void printDeptosConGato(int pisosConGato[], int deptosConGato[], int cantidad) {
+  printf("Los departamentos con al menos un gato son:\n");
+  for (int i = 0; i < cantidad; ++i) {
+    printf("el departamento %d del piso %d\n", deptosConGato[i], pisosConGato[i]);
+  }
+  printf("\n");
+}
+
+int encuentraDeptosConOtraMascota(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConOtraMascota[], int deptosConOtraMascota[]) {
+  depto_t structActual;
+  int nextIndex = 0;
+  return nextIndex;
+}
+
+void printDeptosConOtraMascota(int pisosConOtraMascota[], int deptosConOtraMascota[], int cantidad) {
+  printf("Los departamentos con al menos una mascota que no es perro ni gato son:\n");
+  for (int i = 0; i < cantidad; ++i) {
+    printf("el departamento %d del piso %d\n", deptosConOtraMascota[i], pisosConOtraMascota[i]);
+  }
+  printf("\n");
+}
+
+int encuentraDeptosMenosIngresos(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConMenosIngresos[], int deptosConMenosIngresos[]) {
+  depto_t structActual;
+  int nextIndex = 0;
+  return nextIndex;
+}
+
+void printDeptosMenosIngreso(int pisosMenosIngresos[], int deptosMenosIngresos[], int cantidad) {
+  printf("Los departamentos con menos ingresos son:\n");
+  for (int i = 0; i < cantidad; ++i) {
+    printf("el departamento %d del piso %d\n", deptosMenosIngresos[i], pisosMenosIngresos[i]);
+  }
+  printf("\n");
+}
+
+int sumaRenta(depto_t* edificioPtr, int deptosPorPiso, int pisos) {
+  float rentaAcumulada;
+
+  return rentaAcumulada;
+}
+
+int encuentraNiniosMenorEdad(depto_t *edificioPtr, int deptosPorPiso, int pisos,
+                       int pisosMenorEdad[], int deptosMenorEdad[],
+                       int indicesDeNiniosMenorEdad[]) {
+  int nextIndex = 0;
+  return nextIndex;
+}
+
+void printNiniosMenorEdad(int pisosNiniosMenorEdad[], int deptosNiniosMenorEdad[], int indicesNiniosMenorEdad[],
+                             int anios, int cantidad)
+{
+  printf("Los ninios de menor edad en el edificio son:\n");
+  for (int i = 0; i < cantidad; ++i) {
+    printf("el ninio numero %d del piso %d y departamento %d\n",
+           indicesNiniosMenorEdad[i] + 1, pisosNiniosMenorEdad[i] + 1,
+           deptosNiniosMenorEdad[i] + 1);
+  }
+  printf("\n");
+}
