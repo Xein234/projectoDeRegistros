@@ -1,6 +1,4 @@
-#include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 
 const int MAX_HABITANTES_POR_DEPTO = 6;
 const float MAX_RENTA = 9000;
@@ -41,7 +39,7 @@ depto_t llenaDepartamento(int piso, int deptoEnPiso) {
   //  sal del bloque de código
   while (true) {
     printf(
-        "Dame un valor valido para la renta del departamento %d del piso %d: ",
+        "Renta del departamento %d del piso %d: ",
         piso + 1, deptoEnPiso + 1);
 
     scanf("%f", &depto.renta);
@@ -53,7 +51,7 @@ depto_t llenaDepartamento(int piso, int deptoEnPiso) {
   }
 
   while (true) {
-    printf("Dame el numero de adultos en este depto: ");
+    printf("Numero de adultos en este departamento: ");
 
     scanf("%d", &depto.numAdultos);
     if (depto.numAdultos < 1) {
@@ -63,12 +61,9 @@ depto_t llenaDepartamento(int piso, int deptoEnPiso) {
     break;
   }
 
-  printf("Dame el numero de ninios en este depto: ");
-  scanf("%d", &depto.numNinios);
-
   for (int i = 0; i < depto.numAdultos; i++) {
     while (true) {
-      printf("Dame la edad del adulto numero %d: ", i + 1);
+      printf("Edad del adulto numero %d: ", i + 1);
       scanf("%d", &depto.edadesAdultos[i]);
       if (depto.edadesAdultos[i] < 0) {
         printf("Tiene que ser un numero positivo\n");
@@ -78,17 +73,21 @@ depto_t llenaDepartamento(int piso, int deptoEnPiso) {
     }
   }
 
-  printf("¿Cuantos perros habitan el departamento?");
+  printf("Numero de ninios en este departamento: ");
+  scanf("%d", &depto.numNinios);
+
+  printf("Numero de perros que habitan en este departamento: ");
   scanf("%d", &depto.mascotas.numPerros);
 
-  printf("¿Cuantos gatos habitan el departamento?");
+  printf("Numero de gatos que habitan en este departamento: ");
   scanf("%d", &depto.mascotas.numGatos);
 
-  printf("¿Cuantos perros habitan el departamento?");
+  printf("Numero de otras mascotas que habitan en este departamento: ");
   scanf("%d", &depto.mascotas.numPerros);
 
   while (true) {
-    printf("¿cual es el ingreso mensual de los habitantes del departamento %d del piso %d?\n", piso, deptoEnPiso);
+    printf("Ingreso mensual de los habitantes del departamento %d del piso %d?\n",
+           piso + 1, deptoEnPiso + 1);
     scanf ("%f", &(depto.ingreso));
     if(depto.ingreso < 3000)
     {
@@ -136,6 +135,9 @@ int encuentraAdultosMayorEdad(depto_t *edificioPtr, int deptosPorPiso, int pisos
 
       structActual = *(edificioPtr + (pisoActual * deptosPorPiso + deptoActual));
       for (int adulto = 0; adulto < structActual.numAdultos; adulto++) {
+        if ( deptoActual == 1 && pisoActual == 0 && adulto == 0) {
+          continue;
+        }
         edadActual = structActual.edadesAdultos[adulto];
 
         if (edadActual < *mayorEdad) {
@@ -200,7 +202,7 @@ int encuentraDeptosMayorRenta(depto_t *edificioPtr, int deptosPorPiso, int pisos
   for (int deptoActual = 0; deptoActual < deptosPorPiso; deptoActual++) {
     for (int pisoActual = 0; pisoActual < pisos; pisoActual++) {
 
-      if ( deptoActual == 0 && pisoActual == 0 ) {
+      if ( (deptoActual == 0 || deptoActual == 1) && pisoActual == 0 ) {
         continue;
       }
 
