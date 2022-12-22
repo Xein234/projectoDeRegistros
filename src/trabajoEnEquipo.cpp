@@ -63,6 +63,9 @@ depto_t llenaDepartamento(int piso, int deptoEnPiso) {
     break;
   }
 
+  printf("Dame el numero de ninios en este depto: ");
+  scanf("%d", &depto.numNinios);
+
   for (int i = 0; i < depto.numAdultos; i++) {
     while (true) {
       printf("Dame la edad del adulto numero %d: ", i + 1);
@@ -73,6 +76,26 @@ depto_t llenaDepartamento(int piso, int deptoEnPiso) {
       }
       break;
     }
+  }
+
+  printf("¿Cuantos perros habitan el departamento?");
+  scanf("%d", &depto.mascotas.numPerros);
+
+  printf("¿Cuantos gatos habitan el departamento?");
+  scanf("%d", &depto.mascotas.numGatos);
+
+  printf("¿Cuantos perros habitan el departamento?");
+  scanf("%d", &depto.mascotas.numPerros);
+
+  while (true) {
+    printf("¿cual es el ingreso mensual de los habitantes del departamento %d del piso %d?\n", piso, deptoEnPiso);
+    scanf ("%f", &(depto.ingreso));
+    if(depto.ingreso < 3000)
+    {
+      printf("Con ese ingreso no pude rentar el departamento\n");
+      continue;
+    }
+    break;
   }
 
   return depto;
@@ -152,12 +175,55 @@ void printAdultosDeMayorEdad(int pisosMayorEdad[], int deptosMayorEdad[], int in
   printf("\n");
 }
 
-int encuentraDeptosMayorRenta(depto_t *edificioPtr, int deptosPorPiso, int pisos,
-                       int pisosMayorRenta[], int depatosMayorRenta[],
-                     int* mayorRenta) {
-  perror("Aun no implementado");
+/* int encuentraDeptosMayorRenta(depto_t *edificioPtr, int deptosPorPiso, int pisos, */
+/*                        int pisosMayorRenta[], int depatosMayorRenta[], */
+/*                      int* mayorRenta) { */
+/*   perror("Aun no implementado"); */
 
-  int nextIndex = 0;
+/*   int nextIndex = 0; */
+/*   return nextIndex; */
+/* } */
+
+int encuentraDeptosMayorRenta(depto_t *edificioPtr, int deptosPorPiso, int pisos,
+                       int pisosMayorRenta[], int deptosMayorRenta[],
+                     int* mayorRenta) {
+
+  int rentaActual = (edificioPtr + 1)->renta;
+  *mayorRenta = rentaActual;
+  pisosMayorRenta[0] = 0;
+  deptosMayorRenta[0] = 1;
+  int nextIndex = 1;
+
+
+  depto_t structActual;
+
+  for (int deptoActual = 0; deptoActual < deptosPorPiso; deptoActual++) {
+    for (int pisoActual = 0; pisoActual < pisos; pisoActual++) {
+
+      if ( deptoActual == 0 && pisoActual == 0 ) {
+        continue;
+      }
+
+      structActual = *(edificioPtr + (pisoActual * deptosPorPiso + deptoActual));
+      rentaActual = structActual.renta;
+      if (rentaActual < *mayorRenta) {
+        continue;
+      }
+
+      if (rentaActual > *mayorRenta) {
+        *mayorRenta = rentaActual;
+        pisosMayorRenta[0] = pisoActual;
+        deptosMayorRenta[0] = deptoActual;
+        nextIndex = 1;
+        continue;
+      }
+
+      pisosMayorRenta[nextIndex] = pisoActual;
+      deptosMayorRenta[nextIndex] = deptoActual;
+      nextIndex++;
+    }
+  }
+
   return nextIndex;
 }
 
@@ -169,6 +235,22 @@ void printDeptosMayorRenta(int pisosMayorRenta[], int deptosMayorRenta[],
 int encuentraDeptosConPerro(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConPerro[], int deptosConPerro[]) {
   depto_t structActual;
   int nextIndex = 0;
+
+  for (int deptoActual = 0; deptoActual < deptosPorPiso; deptoActual++) {
+    for (int pisoActual = 0; pisoActual < pisos; pisoActual++) {
+
+      if ( deptoActual == 0 && pisoActual == 0 ) {
+        continue;
+      }
+
+      structActual = *(edificioPtr + (pisoActual * deptosPorPiso + deptoActual));
+      if (structActual.mascotas.numPerros > 0) {
+        pisosConPerro[nextIndex] = pisoActual;
+        deptosConPerro[nextIndex] = deptoActual;
+        nextIndex++;
+      }
+    }
+  }
 
   return nextIndex;
 }
@@ -246,4 +328,27 @@ void printNiniosMenorEdad(int pisosNiniosMenorEdad[], int deptosNiniosMenorEdad[
            deptosNiniosMenorEdad[i] + 1);
   }
   printf("\n");
+}
+
+int CantNinios(depto_t *edificioPtr, int n, int m){
+  //deptosPorPiso -> n
+  //piso -> m
+  int i, j, cont=0;
+  depto_t structActual;
+  //Revisar por cada renglon y columna tomando a la cantidad de niños por deptos.
+  for(i=0; i<m; i++){
+    //por depto
+    for(j=0; j<n; j++){
+      //por piso
+      //Exceptuando al departamento [0][0]
+      structActual = *(edificioPtr + ((i * n) + j));
+      if((i!=0&&j==0)||(i==0&&j!=0)){
+        //Se suma a cada niño de la matriz depto_t
+        cont=cont+structActual.numNinios;
+      }
+      printf("Aqui fila: %d\n y renglon: %d\n Numero de ninos: %d", i, j, structActual.numNinios);
+    }
+  }
+  //Devolver a cont a nombre de canin
+  return (cont);
 }
