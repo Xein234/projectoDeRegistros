@@ -1,11 +1,16 @@
 # Instrucciones
 
-Para correr el programa, desde una terminal en el directorio del projecto usa
+Para descargar, usa
 ```
-make build/main && ./build/main
+git clone --recurse-submodules https://github.com/Xein234/projectoDeRegistros
 ```
 
-Para correr los tests usa
+Para correr el programa, usa
+```
+cd projectoDeRegistros && make build/main && ./build/main
+```
+
+Para correr los tests, desde el directorio projectoDeRegistros, usa
 ```
 make build/trabajoEnEquipo_test2 && ./build/trabajoEnEquipo_test2
 ```
@@ -13,4 +18,4 @@ make build/trabajoEnEquipo_test2 && ./build/trabajoEnEquipo_test2
 
 # Pendientes:
 
-- Refactorizar.
+- Refactorizar
