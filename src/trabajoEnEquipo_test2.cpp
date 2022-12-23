@@ -60,7 +60,7 @@ const depto_t depto5 =\
   .mascotas = mascotas5,
   .numNinios = 0,
   .edadesNinios = {},
-  .numAdultos = 1,
+  .numAdultos = 0,
   .edadesAdultos = {18},
   .ingreso = 8000};
 
@@ -132,8 +132,8 @@ TEST_CASE("encuentraDeptosConGato()"){
 
   int nextIndex = encuentraDeptosConGato(&edificio[0][0], deptosPorPiso, pisos, pisosConGato, deptosConGato);
 
-  int pisosConGatoEsperados[] =  {0, 1, 1, 1};
-  int deptosConGatoEsperados[] = {1, 0, 1, 2};
+  int pisosConGatoEsperados[] =  {1, 0, 1, 1};
+  int deptosConGatoEsperados[] = {0, 1, 1, 2};
 
   CHECK(nextIndex == 4);
     for (int i = 0; i < nextIndex; ++i) {
@@ -167,10 +167,11 @@ TEST_CASE("encuentraNiniosMenorEdad()") {
   int pisosNiniosMenorEdad[pisos*deptosPorPiso-1];
   int deptosNiniosMenorEdad[pisos*deptosPorPiso-1];
   int indicesNiniosMenorEdad[(pisos*deptosPorPiso-1)*MAX_HABITANTES_POR_DEPTO];
+  int menorEdad;
 
-  int nextIndex = encuentraNiniosMenorEdad(&edificio[0][0], deptosPorPiso, pisos, pisosNiniosMenorEdad, deptosNiniosMenorEdad, indicesNiniosMenorEdad);
+  int nextIndex = encuentraNiniosMenorEdad(&edificio[0][0], deptosPorPiso, pisos, pisosNiniosMenorEdad, deptosNiniosMenorEdad, indicesNiniosMenorEdad, &menorEdad);
 
-  int indicesNiniosMenorEdadEsperados[] = {1, 1, 1};
+  int indicesNiniosMenorEdadEsperados[] = {0, 1, 2};
   int pisosNiniosMenorEdadEsperados[] =  {0, 0, 0};
   int deptosNiniosMenorEdadEsperados[] = {1, 1, 1};
 

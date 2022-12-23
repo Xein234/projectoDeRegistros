@@ -66,9 +66,11 @@ int sumaRenta(depto_t* edificioPtr, int deptosPorPiso, int pisos);
 
 int encuentraNiniosMenorEdad(depto_t *edificioPtr, int deptosPorPiso, int pisos,
                        int pisosMenorEdad[], int deptosMenorEdad[],
-                       int indicesDeNiniosMenorEdad[]);
+                       int indicesDeNiniosMenorEdad[], int *menorEdad);
 
 void printNiniosMenorEdad(int pisosNiniosMenorEdad[], int deptosNiniosMenorEdad[], int indicesNiniosMenorEdad[], int anios, int cantidad);
 
 int CantNinios(depto_t *edificioPtr, int n, int m);
+
+void printCantNinios(int cant);
 #endif

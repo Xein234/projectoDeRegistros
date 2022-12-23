@@ -45,8 +45,8 @@ depto_t llenaDepartamento(int piso, int deptoEnPiso) {
     while (true) {
       printf("Edad del adulto numero %d: ", i + 1);
       scanf("%d", &depto.edadesAdultos[i]);
-      if (depto.edadesAdultos[i] < 0) {
-        printf("Tiene que ser un numero positivo\n");
+      if (depto.edadesAdultos[i] < 18) {
+        printf("Tiene que ser mayor a 18\n");
         continue;
       }
       break;
@@ -66,12 +66,17 @@ depto_t llenaDepartamento(int piso, int deptoEnPiso) {
   scanf("%d", &depto.mascotas.numPerros);
 
   while (true) {
-    printf("Ingreso mensual de los habitantes del departamento %d del piso %d?\n",
+    printf("Ingreso mensual de los habitantes del departamento %d del piso %d: ",
            piso + 1, deptoEnPiso + 1);
     scanf ("%f", &(depto.ingreso));
-    if(depto.ingreso < 3000)
+    if (depto.ingreso < 3000)
     {
       printf("Con ese ingreso no pude rentar el departamento\n");
+      continue;
+    }
+
+    if (depto.ingreso < depto.renta) {
+      printf("Con ese ingreso se puede rentar el departamento\n");
       continue;
     }
     break;
@@ -157,15 +162,6 @@ void printAdultosDeMayorEdad(int pisosMayorEdad[], int deptosMayorEdad[], int in
   printf("\n");
 }
 
-/* int encuentraDeptosMayorRenta(depto_t *edificioPtr, int deptosPorPiso, int pisos, */
-/*                        int pisosMayorRenta[], int depatosMayorRenta[], */
-/*                      int* mayorRenta) { */
-/*   perror("Aun no implementado"); */
-
-/*   int nextIndex = 0; */
-/*   return nextIndex; */
-/* } */
-
 int encuentraDeptosMayorRenta(depto_t *edificioPtr, int deptosPorPiso, int pisos,
                        int pisosMayorRenta[], int deptosMayorRenta[],
                      float* mayorRenta) {
@@ -211,7 +207,11 @@ int encuentraDeptosMayorRenta(depto_t *edificioPtr, int deptosPorPiso, int pisos
 
 void printDeptosMayorRenta(int pisosMayorRenta[], int deptosMayorRenta[],
                            float renta, int cantidad) {
-  perror("Aun no implementado");
+  printf("Los departamentos con mayor renta son:\n");
+  for (int i = 0; i < cantidad; ++i) {
+    printf("el departamento %d del piso %d\n",
+           deptosMayorRenta[i] + 1, pisosMayorRenta[i] + 1);
+  }
 }
 
 int encuentraDeptosConPerro(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConPerro[], int deptosConPerro[]) {
@@ -248,6 +248,23 @@ void printDeptosConPerro(int pisosConPerro[], int deptosConPerro[], int cantidad
 int encuentraDeptosConGato(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConGato[], int deptosConGato[]) {
   depto_t structActual;
   int nextIndex = 0;
+
+  for (int deptoActual = 0; deptoActual < deptosPorPiso; deptoActual++) {
+    for (int pisoActual = 0; pisoActual < pisos; pisoActual++) {
+
+      if ( deptoActual == 0 && pisoActual == 0 ) {
+        continue;
+      }
+
+      structActual = *(edificioPtr + (pisoActual * deptosPorPiso + deptoActual));
+      if (structActual.mascotas.numGatos > 0) {
+        pisosConGato[nextIndex] = pisoActual;
+        deptosConGato[nextIndex] = deptoActual;
+        nextIndex++;
+      }
+    }
+  }
+
   return nextIndex;
 }
 
@@ -262,6 +279,23 @@ void printDeptosConGato(int pisosConGato[], int deptosConGato[], int cantidad) {
 int encuentraDeptosConOtraMascota(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConOtraMascota[], int deptosConOtraMascota[]) {
   depto_t structActual;
   int nextIndex = 0;
+
+  for (int deptoActual = 0; deptoActual < deptosPorPiso; deptoActual++) {
+    for (int pisoActual = 0; pisoActual < pisos; pisoActual++) {
+
+      if ( deptoActual == 0 && pisoActual == 0 ) {
+        continue;
+      }
+
+      structActual = *(edificioPtr + (pisoActual * deptosPorPiso + deptoActual));
+      if (structActual.mascotas.numOtras > 0) {
+        pisosConOtraMascota[nextIndex] = pisoActual;
+        deptosConOtraMascota[nextIndex] = deptoActual;
+        nextIndex++;
+      }
+    }
+  }
+
   return nextIndex;
 }
 
@@ -272,12 +306,6 @@ void printDeptosConOtraMascota(int pisosConOtraMascota[], int deptosConOtraMasco
   }
   printf("\n");
 }
-
-/* int encuentraDeptosMenosIngresos(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConMenosIngresos[], int deptosConMenosIngresos[]) { */
-/*   depto_t structActual; */
-/*   int nextIndex = 0; */
-/*   return nextIndex; */
-/* } */
 
 int encuentraDeptosMenosIngresos(depto_t *edificioPtr, int deptosPorPiso, int pisos,
                        int pisosConMenosIngresos[], int deptosConMenosIngresos[],
@@ -336,10 +364,62 @@ int sumaRenta(depto_t* edificioPtr, int deptosPorPiso, int pisos) {
   return rentaAcumulada;
 }
 
+/* int encuentraNiniosMenorEdad(depto_t *edificioPtr, int deptosPorPiso, int pisos, */
+/*                        int pisosMenorEdad[], int deptosMenorEdad[], */
+/*                        int indicesDeNiniosMenorEdad[], int* menorEdad) { */
+/*   int nextIndex = 0; */
+/*   return nextIndex; */
+/* } */
 int encuentraNiniosMenorEdad(depto_t *edificioPtr, int deptosPorPiso, int pisos,
                        int pisosMenorEdad[], int deptosMenorEdad[],
-                       int indicesDeNiniosMenorEdad[]) {
-  int nextIndex = 0;
+                       int indicesNiniosMenorEdad[], int* menorEdad) {
+
+  int edadActual = (edificioPtr + 1)->edadesNinios[0];
+  *menorEdad = edadActual;
+  pisosMenorEdad[0] = 0;
+  deptosMenorEdad[0] = 1;
+  indicesNiniosMenorEdad[0] = 0;
+  int nextIndex = 1;
+
+
+  depto_t structActual;
+
+  for (int deptoActual = 0; deptoActual < deptosPorPiso; deptoActual++) {
+    for (int pisoActual = 0; pisoActual < pisos; pisoActual++) {
+
+      if ( deptoActual == 0 && pisoActual == 0 ) {
+        continue;
+      }
+
+      structActual = *(edificioPtr + (pisoActual * deptosPorPiso + deptoActual));
+      for (int ninio = 0; ninio < structActual.numNinios; ninio++) {
+        if ( deptoActual == 1 && pisoActual == 0 && ninio == 0) {
+          continue;
+        }
+        edadActual = structActual.edadesNinios[ninio];
+
+        if (edadActual > *menorEdad) {
+          continue;
+        }
+
+        if (edadActual < *menorEdad) {
+          *menorEdad = edadActual;
+          pisosMenorEdad[0] = pisoActual;
+          deptosMenorEdad[0] = deptoActual;
+          indicesNiniosMenorEdad[0] = ninio;
+          nextIndex = 1;
+          continue;
+        }
+
+        pisosMenorEdad[nextIndex] = pisoActual;
+        deptosMenorEdad[nextIndex] = deptoActual;
+        indicesNiniosMenorEdad[nextIndex] = ninio;
+        nextIndex++;
+      }
+    }
+  }
+
+
   return nextIndex;
 }
 
@@ -371,9 +451,12 @@ int CantNinios(depto_t *edificioPtr, int n, int m){
         //Se suma a cada niño de la matriz depto_t
         cont=cont+structActual.numNinios;
       }
-      printf("Aqui fila: %d\n y renglon: %d\n Numero de ninos: %d", i, j, structActual.numNinios);
     }
   }
   //Devolver a cont a nombre de canin
   return (cont);
+}
+
+void printCantNinios(int cant) {
+  printf("La cantidad de ninios en el edificio es: %d\n", cant);
 }

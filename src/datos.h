@@ -43,7 +43,7 @@ const depto_t DATOS_EDIFICIO[][3] = {
       .mascotas = { .numPerros = 0, .numGatos = 7, .numOtras = 0, },
       .numNinios = 0,
       .edadesNinios = {},
-      .numAdultos = 1,
+      .numAdultos = 0,
       .edadesAdultos = {99},
       .ingreso = 6000},
 

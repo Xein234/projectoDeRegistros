@@ -88,25 +88,45 @@ int main(int argc, char *argv[]) {
       nextIndex = encuentraDeptosMayorRenta(&edificio[0][0], deptosPorPiso, pisos, pisosMayorRenta, deptosMayorRenta, &mayorRenta);
 
       printDeptosMayorRenta(pisosMayorRenta, deptosMayorRenta, mayorRenta, nextIndex);
-    }
-    else if (strcmp(tipo, "mascotas") == 0) {
+    } else if (strcmp(tipo, "mascotas") == 0) {
       int pisosConPerro[pisos*deptosPorPiso-1];
       int deptosConPerro[pisos*deptosPorPiso-1];
 
       nextIndex = encuentraDeptosConPerro(&edificio[0][0], deptosPorPiso, pisos, pisosConPerro, deptosConPerro);
       printDeptosConPerro(pisosConPerro, deptosConPerro, nextIndex);
 
-      
+      int pisosConGato[pisos*deptosPorPiso-1];
+      int deptosConGato[pisos*deptosPorPiso-1];
+
+      nextIndex = encuentraDeptosConGato(&edificio[0][0], deptosPorPiso, pisos, pisosConGato, deptosConGato);
+      printDeptosConGato(pisosConGato, deptosConGato, nextIndex);
+
+      int pisosConOtraMascota[pisos*deptosPorPiso-1];
+      int deptosConOtraMascota[pisos*deptosPorPiso-1];
+
+      nextIndex = encuentraDeptosConOtraMascota(&edificio[0][0], deptosPorPiso, pisos, pisosConOtraMascota, deptosConOtraMascota);
+      printDeptosConOtraMascota(pisosConOtraMascota, deptosConOtraMascota, nextIndex);
+    } else if (strcmp(tipo, "ninios") == 0) {
+      int c = CantNinios(&edificio[0][0], deptosPorPiso, pisos);
+      printCantNinios(c);
+
+      int pisosNiniosMenorEdad[(pisos*deptosPorPiso-1)*(MAX_HABITANTES_POR_DEPTO-1)];
+      int deptosNiniosMenorEdad[(pisos*deptosPorPiso-1)*(MAX_HABITANTES_POR_DEPTO-1)];
+      int indicesNiniosMenorEdad[(pisos*deptosPorPiso-1)*(MAX_HABITANTES_POR_DEPTO-1)];
+      int menorEdad;
+
+      nextIndex = encuentraNiniosMenorEdad(&edificio[0][0], deptosPorPiso, pisos, pisosNiniosMenorEdad, deptosNiniosMenorEdad, indicesNiniosMenorEdad, &menorEdad);
+      printNiniosMenorEdad(pisosNiniosMenorEdad, deptosNiniosMenorEdad, indicesNiniosMenorEdad, menorEdad, nextIndex);
+    } else if (strcmp(tipo, "ingreso") == 0) {
+      int pisosConMenosIngresos[pisos*deptosPorPiso-1];
+      int deptosConMenosIngresos[pisos*deptosPorPiso-1];
+      int indicesConMenosIngresos[pisos*deptosPorPiso-1];
+      float menorIngreso;
+      nextIndex = encuentraDeptosMenosIngresos(&edificio[0][0], deptosPorPiso, pisos, pisosConMenosIngresos, deptosConMenosIngresos, &menorIngreso);
+      printDeptosMenosIngreso(pisosConMenosIngresos, deptosConMenosIngresos, nextIndex);
     }
   }
 
 
   return 0;
 }
-
-  /* int pisosConPerro[pisos*deptosPorPiso-1]; */
-  /* int deptosConPerro[pisos*deptosPorPiso-1]; */
-
-  /* nextIndex = encuentraDeptosConPerro(&edificio[0][0], deptosPorPiso, pisos, pisosConPerro, deptosConPerro); */
-
-  /* printDeptosConPerro(pisosConPerro, deptosConPerro, nextIndex); */
