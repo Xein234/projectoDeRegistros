@@ -12,7 +12,7 @@ void llenadoManual() {
 }
 
 int main(int argc, char *argv[]) {
-  printf("¿Desea cargar los datos de datos.h o ingresarlos manualmente?\n");
+  printf("Desea cargar los datos de datos.h o ingresarlos manualmente?\n");
   printf("[cargar/manual]: ");
   int pisos, deptosPorPiso, nextIndex;
   char respuesta[20], tipo[20];
@@ -22,8 +22,8 @@ int main(int argc, char *argv[]) {
     printf("La renta de cada departamento oscila entre $3,000 y $9,000 \n");
     printf("El primer departamento de la planta baja ya está ocupado; no lo utilizaremos\n");
     while (true) {
-    // pregunta por el tamaño de la matriz
-      printf("¿Cuantos pisos tiene el edificio?\n");
+    // pregunta por el tamano de la matriz
+      printf("Cuantos pisos tiene el edificio?\n");
       scanf("%d", &pisos);
 
       if ( pisos < 2 ) {
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     }
 
     while (true) {
-      printf("¿Cuantos departamentos por piso tiene?\n");
+      printf("Cuantos departamentos por piso tiene?\n");
       scanf("%d", &deptosPorPiso);
 
       if ( deptosPorPiso < 2 ) {
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
     }
 
   while (true) {
-    printf("¿Qué tipo de análisis desea realizar?\n");
+    printf("Que tipo de analisis desea realizar?\n");
     printf("[renta/edad/mascotas/ninios/ingreso]: ");
     scanf("%s", tipo);
 
