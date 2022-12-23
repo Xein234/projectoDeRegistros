@@ -2,10 +2,12 @@
 
 CC     = g++
 CFLAGS = -Wall -pedantic -g -Wextra -pthread -std=c++20
-OBJS   = main.o trabajoEnEquipo.o trabajoEnEquipo_test2.o
 
 build/%.o: src/%.cpp
-	$(CC) -c $(CFLAGS) $< -o $@
+	mkdir -p build
+	$(CC) -c -MD $(CFLAGS) $< -o $@
+
+-include build/*.d
 
 build/main: build/main.o build/trabajoEnEquipo.o
 	$(CC) $(CFLAGS) $^ -o $@
