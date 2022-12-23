@@ -1,6 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "../doctest/doctest/doctest.h"
-#include "trabajoEnEquipo.cpp"
+#include "trabajoEnEquipo.h"
 #include <stdio.h>
 const mascotas_t mascotasArrendatario = { .numPerros = 11, .numGatos = 22, .numOtras = 15, };
 const mascotas_t mascotas1 = { .numPerros = 1, .numGatos = 1, .numOtras = 1, };
@@ -95,7 +95,7 @@ TEST_CASE("encuentraDeptosMayorRenta()") {
   int pisosMayorRenta[pisos*deptosPorPiso-1];
   int deptosMayorRenta[pisos*deptosPorPiso-1];
 
-  int mayorRenta;
+  float mayorRenta;
   int nextIndex = encuentraDeptosMayorRenta(&edificio[0][0], deptosPorPiso, pisos, pisosMayorRenta, deptosMayorRenta, &mayorRenta);
 
   int pisosMayorRentaEsperados[] = {1, 0};
@@ -103,7 +103,7 @@ TEST_CASE("encuentraDeptosMayorRenta()") {
 
   CHECK(nextIndex == 2);
 
-  CHECK(mayorRenta == 9000);
+  CHECK(mayorRenta == 9000.0);
     for (int i = 0; i < nextIndex; ++i) {
       CHECK(pisosMayorRenta[i] == pisosMayorRentaEsperados[i]);
       CHECK(deptosMayorRenta[i] == deptosMayorRentaEsperados[i]);
@@ -145,8 +145,9 @@ TEST_CASE("encuentraDeptosConGato()"){
 TEST_CASE("encuentraFamiliaMenosIngresos()"){
   int pisosMenosIngresos[pisos*deptosPorPiso-1];
   int deptosMenosIngresos[pisos*deptosPorPiso-1];
+  float menorIngreso;
 
-  int nextIndex = encuentraDeptosMenosIngresos(&edificio[0][0], deptosPorPiso, pisos, pisosMenosIngresos, deptosMenosIngresos);
+  int nextIndex = encuentraDeptosMenosIngresos(&edificio[0][0], deptosPorPiso, pisos, pisosMenosIngresos, deptosMenosIngresos, &menorIngreso);
 
   int pisosMenosIngresosEsperados[] =  {0, 1};
   int deptosMenosIngresosEsperados[] = {1, 0};

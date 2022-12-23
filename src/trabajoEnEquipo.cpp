@@ -1,25 +1,5 @@
 #include <stdio.h>
-
-const int MAX_HABITANTES_POR_DEPTO = 6;
-const float MAX_RENTA = 9000;
-const float MIN_RENTA = 3000;
-
-typedef struct mascotas_t {
-  int numPerros;
-  int numGatos;
-  int numOtras;
-} mascotas_t;
-
-
-typedef struct depto_t {
-  float      renta;
-  mascotas_t mascotas;
-  int        numNinios;
-  int        edadesNinios[5];
-  int        numAdultos;
-  int        edadesAdultos[6];
-  float      ingreso;
-} depto_t;
+#include "trabajoEnEquipo.h"
 
 depto_t llenaDepto();
 void llenaEdificio(depto_t* ed, int pisos, int deptosPorPiso);
@@ -188,7 +168,7 @@ void printAdultosDeMayorEdad(int pisosMayorEdad[], int deptosMayorEdad[], int in
 
 int encuentraDeptosMayorRenta(depto_t *edificioPtr, int deptosPorPiso, int pisos,
                        int pisosMayorRenta[], int deptosMayorRenta[],
-                     int* mayorRenta) {
+                     float* mayorRenta) {
 
   int rentaActual = (edificioPtr + 1)->renta;
   *mayorRenta = rentaActual;
@@ -293,9 +273,52 @@ void printDeptosConOtraMascota(int pisosConOtraMascota[], int deptosConOtraMasco
   printf("\n");
 }
 
-int encuentraDeptosMenosIngresos(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConMenosIngresos[], int deptosConMenosIngresos[]) {
+/* int encuentraDeptosMenosIngresos(depto_t* edificioPtr, int deptosPorPiso, int pisos, int pisosConMenosIngresos[], int deptosConMenosIngresos[]) { */
+/*   depto_t structActual; */
+/*   int nextIndex = 0; */
+/*   return nextIndex; */
+/* } */
+
+int encuentraDeptosMenosIngresos(depto_t *edificioPtr, int deptosPorPiso, int pisos,
+                       int pisosConMenosIngresos[], int deptosConMenosIngresos[],
+                     float* menorIngreso) {
+
+  int ingresoActual = (edificioPtr + 1)->ingreso;
+  *menorIngreso = ingresoActual;
+  pisosConMenosIngresos[0] = 0;
+  deptosConMenosIngresos[0] = 1;
+  int nextIndex = 1;
+
+
   depto_t structActual;
-  int nextIndex = 0;
+
+  for (int deptoActual = 0; deptoActual < deptosPorPiso; deptoActual++) {
+    for (int pisoActual = 0; pisoActual < pisos; pisoActual++) {
+
+      if ( (deptoActual == 0 || deptoActual == 1) && pisoActual == 0 ) {
+        continue;
+      }
+
+      structActual = *(edificioPtr + (pisoActual * deptosPorPiso + deptoActual));
+      ingresoActual = structActual.ingreso;
+      if (ingresoActual > *menorIngreso) {
+        continue;
+      }
+
+      if (ingresoActual < *menorIngreso) {
+        *menorIngreso = ingresoActual;
+        pisosConMenosIngresos[0] = pisoActual;
+        deptosConMenosIngresos[0] = deptoActual;
+        nextIndex = 1;
+        continue;
+      }
+
+      pisosConMenosIngresos[nextIndex] = pisoActual;
+      deptosConMenosIngresos[nextIndex] = deptoActual;
+      nextIndex++;
+    }
+  }
+
   return nextIndex;
 }
 
