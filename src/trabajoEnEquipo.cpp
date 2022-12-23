@@ -240,7 +240,7 @@ int encuentraDeptosConPerro(depto_t* edificioPtr, int deptosPorPiso, int pisos, 
 void printDeptosConPerro(int pisosConPerro[], int deptosConPerro[], int cantidad) {
   printf("Los departamentos con al menos un perro son:\n");
   for (int i = 0; i < cantidad; ++i) {
-    printf("el departamento %d del piso %d\n", deptosConPerro[i], pisosConPerro[i]);
+    printf("el departamento %d del piso %d\n", deptosConPerro[i] + 1, pisosConPerro[i] + 1);
   }
   printf("\n");
 }
@@ -271,7 +271,7 @@ int encuentraDeptosConGato(depto_t* edificioPtr, int deptosPorPiso, int pisos, i
 void printDeptosConGato(int pisosConGato[], int deptosConGato[], int cantidad) {
   printf("Los departamentos con al menos un gato son:\n");
   for (int i = 0; i < cantidad; ++i) {
-    printf("el departamento %d del piso %d\n", deptosConGato[i], pisosConGato[i]);
+    printf("el departamento %d del piso %d\n", deptosConGato[i] + 1, pisosConGato[i] + 1);
   }
   printf("\n");
 }
@@ -302,7 +302,7 @@ int encuentraDeptosConOtraMascota(depto_t* edificioPtr, int deptosPorPiso, int p
 void printDeptosConOtraMascota(int pisosConOtraMascota[], int deptosConOtraMascota[], int cantidad) {
   printf("Los departamentos con al menos una mascota que no es perro ni gato son:\n");
   for (int i = 0; i < cantidad; ++i) {
-    printf("el departamento %d del piso %d\n", deptosConOtraMascota[i], pisosConOtraMascota[i]);
+    printf("el departamento %d del piso %d\n", deptosConOtraMascota[i] + 1, pisosConOtraMascota[i] + 1);
   }
   printf("\n");
 }
@@ -353,7 +353,7 @@ int encuentraDeptosMenosIngresos(depto_t *edificioPtr, int deptosPorPiso, int pi
 void printDeptosMenosIngreso(int pisosMenosIngresos[], int deptosMenosIngresos[], int cantidad) {
   printf("Los departamentos con menos ingresos son:\n");
   for (int i = 0; i < cantidad; ++i) {
-    printf("el departamento %d del piso %d\n", deptosMenosIngresos[i], pisosMenosIngresos[i]);
+    printf("el departamento %d del piso %d\n", deptosMenosIngresos[i] + 1, pisosMenosIngresos[i] + 1);
   }
   printf("\n");
 }
